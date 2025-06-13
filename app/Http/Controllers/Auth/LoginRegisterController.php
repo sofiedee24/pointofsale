@@ -50,7 +50,7 @@ class LoginRegisterController extends Controller implements HasMiddleware
 
     public function login(): View
     {
-        return view('auth.signin');
+        return view('auth.login');
     }
 
     public function authenticate(Request $request): RedirectResponse
