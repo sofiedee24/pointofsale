@@ -26,7 +26,7 @@ class LoginRegisterController extends Controller implements HasMiddleware
     {
         return view('auth.register');
     }
-    
+
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -50,7 +50,7 @@ class LoginRegisterController extends Controller implements HasMiddleware
 
     public function login(): View
     {
-        return view('auth.signin');
+        return view('auth.login');
     }
 
     public function authenticate(Request $request): RedirectResponse
@@ -60,8 +60,7 @@ class LoginRegisterController extends Controller implements HasMiddleware
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials))
-        {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('home');
         }
@@ -69,14 +68,13 @@ class LoginRegisterController extends Controller implements HasMiddleware
         return back()->withErrors([
             'email' => 'Your provided credentials do not match in our records.',
         ])->onlyInput('email');
-
     }
-    
+
     public function home(): View
     {
         return view('auth.home');
-    } 
-    
+    }
+
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
