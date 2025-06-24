@@ -83,7 +83,7 @@
 
    </nav>
 
-   <x-sidepanel></x-sidepanel>
+   <x-sidepanel />
 
    <div class="sm:ml-64 p-4">
 
@@ -91,12 +91,12 @@
 
 
 
-         <h1 class="text-dark-400 dark:text-black-500  text-2xl"> Dashboard </h1>
+         <h1 class="text-dark-400 dark:text-black-500 text-2xl"> Dashboard </h1>
 
 
          <div class="rounded-4xl grid grid-cols-4 gap-4 mb-3">
 
-            <div class="bg-gray-50 dark:bg-gray-800  items-start h-20 mt-4">
+            <div class="bg-gray-50 dark:bg-gray-800 items-start h-20 mt-4">
                <p class="ms-2 mt-2"> Total Category </p>
                <p class="dark:text-gray-500 flex items-center justify-center text-2xl text-gray-400">
 
@@ -133,7 +133,7 @@
             </div>
          </div>
 
-         <h1 class="text-dark-400 dark:text-black-500  text-2xl"> Orders </h1>
+         <h1 class="text-dark-400 dark:text-black-500 text-2xl"> Orders </h1>
          <div class="grid grid-cols-4 gap-4 mb-3">
 
             <div class="rounded-4xl bg-gray-50 dark:bg-gray-800 items-start h-20 mt-4">
