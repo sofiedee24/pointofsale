@@ -9,24 +9,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class LoginRegisterController extends Controller implements HasMiddleware
+class LoginRegisterController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('guest', except: ['dashboard', 'logout']),
-            new Middleware('auth', only: ['home', 'logout']),
-        ];
-    }
-
     public function register(): View
     {
         return view('auth.register');
     }
-    
+
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -41,16 +31,19 @@ class LoginRegisterController extends Controller implements HasMiddleware
             'password' => Hash::make($request->password)
         ]);
 
-        $credentials = $request->only('email', 'password');
-        Auth::attempt($credentials);
+        $user->sendEmailVerificationNotification();
+
+        Auth::login($user);
         $request->session()->regenerate();
-        return redirect()->route('home')
-            ->withSuccess('You have successfully registered & logged in!');
+
+        return redirect()->route('verification.notice')
+            ->withSuccess('Registration successful! Please verify your email.');
+
     }
 
     public function login(): View
     {
-        return view('auth.signin');
+        return view('auth.login');
     }
 
     public function authenticate(Request $request): RedirectResponse
@@ -60,23 +53,17 @@ class LoginRegisterController extends Controller implements HasMiddleware
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials))
-        {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('home');
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([
             'email' => 'Your provided credentials do not match in our records.',
         ])->onlyInput('email');
-
     }
-    
-    public function home(): View
-    {
-        return view('auth.home');
-    } 
-    
+
+
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
