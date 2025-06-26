@@ -216,7 +216,7 @@
     <!-- Price -->
     <div>
       <label for="price" class="dark:text-white block mb-1 text-sm font-medium text-gray-900">Price</label>
-      <input type="number" id="price" value="{{ old('price') }}"
+      <input type="number" name="price" id="price" value="{{ old('price') }}"
         class="bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white w-full px-4 py-2 text-sm text-gray-900 border border-gray-300 rounded-lg"
         placeholder="$0.00" required />
     </div>
@@ -250,7 +250,7 @@
       <label for="image-upload" class="dark:text-white block mb-1 text-sm font-medium text-gray-900">
         Product Image
       </label>
-      <input type="file" id="image-upload" accept="image/*"
+      <input type="file" name="image" id="image-upload" accept="image/*"
         class="bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer">
       <p class="dark:text-gray-400 mt-2 text-sm text-gray-500">Upload a product image (JPG, PNG, etc.).</p>
     </div>
@@ -258,7 +258,7 @@
     <!-- Hidden Checkbox -->
     <div>
       <div class="flex items-center mt-2">
-        <input id="hidden" type="checkbox"
+        <input name="is_hidden" id="hidden" type="checkbox"
           class="dark:bg-gray-700 dark:border-gray-600 focus:ring-blue-500 dark:focus:ring-blue-600 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
           {{ old('is_hidden') ? 'checked' : '' }}>
         <label for="hidden" class="dark:text-gray-300 ml-2 text-sm font-medium text-gray-900">Hidden</label>
