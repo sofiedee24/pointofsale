@@ -28,7 +28,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('customers', CustomerController::class)->only(['index', 'create']);
     Route::resource('admins', AdminController::class)->only(['index', 'create']);
     Route::resource('categories', CategoryController::class)->only(['index', 'create', 'edit']);
-    Route::resource('products', ProductController::class)->only(['index', 'create']);
+    Route::resource('products', ProductController::class)->only(['index', 'create', 'store']);
 });
 
 
