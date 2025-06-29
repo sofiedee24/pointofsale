@@ -26,7 +26,7 @@ Route::controller(LoginRegisterController::class)->group(function () {
 });
 
 // Authenticated Routes
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('customers', CustomerController::class)->only(['index', 'create']);
