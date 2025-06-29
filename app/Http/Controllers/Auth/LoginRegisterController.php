@@ -38,7 +38,6 @@ class LoginRegisterController extends Controller
 
         return redirect()->route('verification.notice')
             ->withSuccess('Registration successful! Please verify your email.');
-
     }
 
     public function login(): View
@@ -63,13 +62,6 @@ class LoginRegisterController extends Controller
         ])->onlyInput('email');
     }
 
-<<<<<<< HEAD
-    public function home(): View
-    {
-        return view('auth.home');
-    }
-=======
->>>>>>> refactor/auth-verify-email
 
     public function logout(Request $request): RedirectResponse
     {
