@@ -9,19 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class LoginRegisterController extends Controller implements HasMiddleware
+class LoginRegisterController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('guest', except: ['dashboard', 'logout']),
-            new Middleware('auth', only: ['home', 'logout']),
-        ];
-    }
-
     public function register(): View
     {
         return view('auth.register');
@@ -41,11 +31,14 @@ class LoginRegisterController extends Controller implements HasMiddleware
             'password' => Hash::make($request->password)
         ]);
 
-        $credentials = $request->only('email', 'password');
-        Auth::attempt($credentials);
+        $user->sendEmailVerificationNotification();
+
+        Auth::login($user);
         $request->session()->regenerate();
-        return redirect()->route('home')
-            ->withSuccess('You have successfully registered & logged in!');
+
+        return redirect()->route('verification.notice')
+            ->withSuccess('Registration successful! Please verify your email.');
+
     }
 
     public function login(): View
@@ -62,7 +55,7 @@ class LoginRegisterController extends Controller implements HasMiddleware
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('home');
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([
@@ -70,10 +63,13 @@ class LoginRegisterController extends Controller implements HasMiddleware
         ])->onlyInput('email');
     }
 
+<<<<<<< HEAD
     public function home(): View
     {
         return view('auth.home');
     }
+=======
+>>>>>>> refactor/auth-verify-email
 
     public function logout(Request $request): RedirectResponse
     {
