@@ -215,11 +215,16 @@
                 </div>
             </div>
         </div>
+
+
+
         <label for="table-search" class="sr-only">Search</label>
         <div class="hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-300 font-small me-3 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center justify-center px-3 py-1 mb-3 text-sm text-center text-white transition-all bg-blue-700 rounded-full shadow-sm">
         
             Add Products
         </div>
+
+
     </div>
     <table class="rtl:text-right dark:text-gray-400 w-full text-sm text-left text-gray-500">
         <thead class="bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-xs text-gray-700 uppercase">
@@ -238,14 +243,26 @@
             </tr>
         </thead>
         <tbody>
+
+
+            @forelse ($products as $product)
+                
+            {{-- START CARD --}}
             <tr class="dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 bg-white border-b border-gray-200">
                 
                 <th scope="row" class="whitespace-nowrap dark:text-white flex items-center px-6 py-4 text-gray-900">
-                    <img class="w-10 h-10" src="https://i.pinimg.com/736x/0c/e6/6b/0ce66b2c514f64099fc903d1deea8e5c.jpg" alt="Jese image">
-                    <div class="ps-3">
-                        <div class="text-base font-semibold">Neil Sims</div>
-                        <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
-                    </div>  
+                    {{-- IMAGE --}}
+                    @if ($product->image_path)
+                        <img class="w-10 h-10" src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}">
+                        <div class="ps-3">
+                            <div class="text-base font-semibold">Neil Sims</div>
+                            <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
+                        </div>
+                    @else
+                        <span class="text-sm text-gray-400">—</span>
+                        
+                    @endif
+                        
                 </th>
                
                 <td class="px-6 py-4">
@@ -265,121 +282,13 @@
                     </div>
                 </td>
             </tr>
-            <tr class="dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 bg-white border-b border-gray-200">
+
+            @empty
                 
-                <th scope="row" class="whitespace-nowrap dark:text-white flex items-center px-6 py-4 font-medium text-gray-900">
-                    <img class="w-10 h-10" src="https://i.pinimg.com/736x/a8/89/7d/a8897d8e6590b1d9d968c47900d951b2.jpg" alt="Jese image">
-                    <div class="ps-3">
-                        <div class="text-base font-semibold">Bonnie Green</div>
-                        <div class="font-normal text-gray-500">bonnie@flowbite.com</div>
-                    </div>
+            @endforelse
 
+            {{-- END CARD --}}
 
-                </th>
-                
-                <td class="px-6 py-4">
-                    <div class="flex items-center">
-                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Visible
-                    </div>
-                </td>
-                <td class="px-6 py-4">
-                     
-                <div class="inline-flex items-center justify-center text-white bg-green-700 hover:bg-green-900 focus:outline-none focus:ring-4 focus:ring-green-300 font-small rounded-full text-sm px-2.5 py-0.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all shadow-sm">
-                    
-                    Edit
-                </div>
-
-                <div class="inline-flex items-center justify-center  text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-2.5 py-0.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 ">
-                    Delete
-                </div>
-                </td>
-            </tr>
-            <tr class="dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 bg-white border-b border-gray-200">
-                
-                <th scope="row" class="whitespace-nowrap dark:text-white flex items-center px-6 py-4 font-medium text-gray-900">
-                    <img class="w-12 h-12" src="https://i.pinimg.com/736x/ec/47/14/ec4714d62d9695ce65f6d771c277161c.jpg" alt="Jese image">
-                    <div class="ps-3">
-                        <div class="text-base font-semibold">IPHONE16 PRO</div>
-                        <div class="font-normal text-gray-500">jese@flowbite.com</div>
-                    </div>
-                </th>
-                
-                <td class="px-6 py-4">
-                    <div class="flex items-center">
-                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Visible
-                    </div>
-                </td>
-                <td class="px-6 py-4">
-                     
-                <div class="inline-flex items-center justify-center text-white bg-green-700 hover:bg-green-900 focus:outline-none focus:ring-4 focus:ring-green-300 font-small rounded-full text-sm px-2.5 py-0.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all shadow-sm">
-    
-                    Edit
-                </div>
-
-                <div class="inline-flex items-center justify-center  text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-2.5 py-0.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 ">
-                    Delete
-                </div>
-                </td>
-            </tr>
-            <tr class="dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 bg-white border-b border-gray-200">
-                
-                <th scope="row" class="whitespace-nowrap dark:text-white flex items-center px-6 py-4 font-medium text-gray-900">
-                    <img class="w-12 h-12" src="https://i.pinimg.com/736x/5b/81/0c/5b810c83c20940baa03078ce891c0b80.jpg" alt="Jese image">
-                    <div class="ps-3">
-                        <div class="text-base font-semibold">Iphone 16 Pro</div>
-                        <div class="font-normal text-gray-500">Indigo</div>
-                    </div>
-                </th>
-                
-                <td class="px-6 py-4">
-                    <div class="flex items-center">
-                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Visible
-                    </div>
-                </td>
-                <td class="px-6 py-4">
-                     
-                <div class="inline-flex items-center justify-center text-white bg-green-700 hover:bg-green-900 focus:outline-none focus:ring-4 focus:ring-green-300 font-small rounded-full text-sm px-2.5 py-0.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all shadow-sm">
-    
-                    Edit
-                </div>
-
-                <div class="inline-flex items-center justify-center  text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-2.5 py-0.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 ">
-                Delete
-                </div>
-                </td>
-            </tr>
-            <tr class="dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 bg-white">
-                
-                <th scope="row" class="whitespace-nowrap dark:text-white flex items-center px-6 py-4 font-medium text-gray-900">
-                    <img class="w-12 h-12" src="https://i.pinimg.com/736x/88/17/2e/88172ed0bb2104a96db33c746890ffb6.jpg" alt="Jese image">
-                    <div class="ps-3">
-                        <div class="text-base font-semibold">IPHONE 16 PRO</div>
-                        <div class="font-normal text-gray-500">ocean green</div>
-                    </div>
-                </th>
-                
-                <td class="px-6 py-4">
-                    <div class="flex items-center">
-                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Visible
-                    </div>
-                </td>
-                <td class="px-6 py-4">
-                
-                <div class="inline-flex items-center justify-center text-white bg-green-700 hover:bg-green-900 focus:outline-none focus:ring-4 focus:ring-green-300 font-small rounded-full text-sm px-2.5 py-0.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all shadow-sm">
-    
-                    Edit
-                </div>
-
-                <div class="inline-flex items-center justify-center  text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-2.5 py-0.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 ">
-                Delete
-            </div>
-            
-
-
-
-
-                </td>
-            </tr>
         </tbody>
     </table>
 </div>

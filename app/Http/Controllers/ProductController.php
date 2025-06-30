@@ -13,7 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('productslist');
+        $products = Product::with('category')->latest()->get();
+        return view('productslist', compact('products'));
     }
 
     /**

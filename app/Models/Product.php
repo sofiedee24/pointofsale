@@ -15,4 +15,9 @@ class Product extends Model
         'image_path',
         "is_hidden",
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

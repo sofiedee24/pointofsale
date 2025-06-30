@@ -273,6 +273,8 @@
       </button>
     </div>
 
+    
+
   </div>
 </form>
 
@@ -295,9 +297,6 @@
         let value = parseInt(quantityInput.value) || 0;
         if (value > 0) quantityInput.value = value - 1;
     });
-
-
-    <img id="image-preview" src="#" alt="Image Preview" class="max-h-64 hidden mt-4 border rounded-lg" />
 
 
   const uploadInput = document.getElementById('image-upload');
