@@ -255,8 +255,8 @@
                     @if ($product->image_path)
                         <img class="w-10 h-10" src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}">
                         <div class="ps-3">
-                            <div class="text-base font-semibold">Neil Sims</div>
-                            <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
+                            <div class="text-base font-semibold">{{ $product->name }}</div>
+                            <div class="font-normal text-gray-500">₱{{ number_format($product->price, 2) }}</div>
                         </div>
                     @else
                         <span class="text-sm text-gray-400">—</span>
@@ -264,12 +264,20 @@
                     @endif
                         
                 </th>
+
+                {{-- STATUS --}}
                
                 <td class="px-6 py-4">
                     <div class="flex items-center">
-                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Visible
+                        @if ($product->is_hidden == 1)
+                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Visible
+                        @else
+                            <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Not Visible
+                        @endif
+                        
                     </div>
                 </td>
+
                 <td class="px-6 py-4">
                      
                     <div class="inline-flex items-center justify-center text-white bg-green-700 hover:bg-green-900 focus:outline-none focus:ring-4 focus:ring-green-300 font-small rounded-full text-sm px-2.5 py-0.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all shadow-sm">
@@ -284,6 +292,11 @@
             </tr>
 
             @empty
+
+                <tr class="whitespace-nowrap dark:text-white flex items-center px-6 py-4 text-gray-900">
+                    {{-- NONE FETCHED --}}
+                    No products found.
+                </tr>
                 
             @endforelse
 
