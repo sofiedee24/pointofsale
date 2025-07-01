@@ -303,39 +303,17 @@
 </form>
 
 
-
-
-    
 </body>
 <script>
-    const incrementBtn = document.getElementById('increment-button');
-    const decrementBtn = document.getElementById('decrement-button');
-    const quantityInput = document.getElementById('quantity-input');
+  document.getElementById('increment-button').onclick = () => {
+    const input = document.getElementById('quantity');
+    input.value = parseInt(input.value || 0) + 1;
+  };
 
-    incrementBtn.addEventListener('click', () => {
-        let value = parseInt(quantityInput.value) || 0;
-        quantityInput.value = value + 1;
-    });
-
-    decrementBtn.addEventListener('click', () => {
-        let value = parseInt(quantityInput.value) || 0;
-        if (value > 0) quantityInput.value = value - 1;
-    });
-
-
-  const uploadInput = document.getElementById('image-upload');
-  const preview = document.getElementById('image-preview');
-
-  uploadInput.addEventListener('change', function () {
-    const file = this.files[0];
-    if (file) {
-      preview.src = URL.createObjectURL(file);
-      preview.classList.remove('hidden');
-    } else {
-      preview.classList.add('hidden');
-      preview.src = '#';
-    }
-  });
+  document.getElementById('decrement-button').onclick = () => {
+    const input = document.getElementById('quantity');
+    if (parseInt(input.value) > 0) input.value = parseInt(input.value) - 1;
+  };
 </script>
 
 </html>
