@@ -67,24 +67,44 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        return view('updateproducts', compact('product', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
+            'quantity' => 'required|integer|min:0|max:999',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'is_hidden' => 'sometimes|boolean',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image_path'] = $request->file('image')->store('products', 'public');
+        }
+
+        $validated['is_hidden'] = $request->boolean('is_hidden');
+
+        $product->update($validated);
+
+        return redirect()->route('products.index')->with('success', 'Product updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully!');
     }
 }

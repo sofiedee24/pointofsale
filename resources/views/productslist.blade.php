@@ -205,9 +205,9 @@
                 <td class="px-6 py-4">
                     <div class="flex items-center">
                         @if ($product->is_hidden == 1)
-                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Visible
-                        @else
                             <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Not Visible
+                        @else
+                            <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Visible
                         @endif
                         
                     </div>
@@ -215,13 +215,18 @@
 
                 <td class="px-6 py-4">
                      
-                    <div class="inline-flex items-center justify-center text-white bg-green-700 hover:bg-green-900 focus:outline-none focus:ring-4 focus:ring-green-300 font-small rounded-full text-sm px-2.5 py-0.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all shadow-sm">
-        
-                        Edit
-                    </div>
+                    <a href="{{ route('products.edit', $product->id) }}">
+                        <div class="inline-flex items-center justify-center text-white bg-green-700 hover:bg-green-900 focus:outline-none focus:ring-4 focus:ring-green-300 font-small rounded-full text-sm px-2.5 py-0.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-all shadow-sm">
+                            Edit
+                        </div>
+                    </a>
 
                     <div class="inline-flex items-center justify-center  text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-2.5 py-0.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 ">
-                        Delete
+                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                            @csrf
+                            @method('DELETE')
+                                <button type="submit">Delete</button>
+                        </form>
                     </div>
                 </td>
             </tr>
