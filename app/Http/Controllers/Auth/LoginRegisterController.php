@@ -60,7 +60,7 @@ class LoginRegisterController extends Controller
             // Redirect based on role
             return redirect()->intended(match ($role) {
                 'admin'    => route('dashboard'),      // MUST exist
-                'customer' => route('products.index'), // or just '/products'
+                'user' => route('products.index'), // or just '/products'
                 default    => '/login',                // fallback just in case
             });
         }
