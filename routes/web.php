@@ -15,14 +15,21 @@ use Illuminate\Http\Request;
 Route::get('/', fn() => redirect('/login'));
 
 
-// Auth Routes
 Route::controller(LoginRegisterController::class)->group(function () {
-    Route::get('/register', 'register')->name('register');
-    Route::post('/store', 'store')->name('store');
-    Route::get('/login', 'login')->name('login');
-    Route::post('/authenticate', 'authenticate')->name('authenticate');
-    Route::get('/home', 'home')->name('home');
-    Route::post('/logout', 'logout')->name('logout');
+
+    /* -------------   GUEST‑ONLY ROUTES   ------------- */
+    Route::middleware('guest')->group(function () {
+        Route::get('/register',      'register')->name('register');
+        Route::post('/store',        'store')->name('store');
+        Route::get('/login',         'login')->name('login');
+        Route::post('/authenticate', 'authenticate')->name('authenticate');
+    });
+
+    /* -------------   AUTH‑ONLY ROUTES   ------------- */
+    Route::middleware('auth')->group(function () {
+        Route::get('/home',   'home')->name('home');     // or /dashboard
+        Route::post('/logout', 'logout')->name('logout');   // ← must be POST with @csrf
+    });
 });
 
 // Authenticated Routes
