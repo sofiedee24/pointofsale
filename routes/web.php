@@ -26,17 +26,22 @@ Route::controller(LoginRegisterController::class)->group(function () {
 });
 
 // Authenticated Routes
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware(['auth', 'verified', 'role:admin,user'])->group(function () {
 
+    // Customers and admins can both view product & category listings
+    Route::get('/products',   [ProductController::class, 'index'])->name('products.index');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+
+    // Admin-only: manage customers
     Route::middleware('role:admin')->group(function () {
-
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('customers', CustomerController::class)->only(['index', 'create']);
-        Route::resource('admins', AdminController::class)->only(['index', 'create']);
-        Route::resource('categories', CategoryController::class)->only(['index', 'create', 'edit']);
-        Route::resource('products', ProductController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+        Route::resource('products',   ProductController::class)->except('index');      // Full CRUD except list
+        Route::resource('categories', CategoryController::class)->except('index');     // Full CRUD except list
+        Route::resource('admins',     AdminController::class)->only(['index', 'create']);
     });
 });
+
 
 Route::fallback(function () {
     return response('Page not found', 404);

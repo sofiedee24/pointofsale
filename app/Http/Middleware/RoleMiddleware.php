@@ -18,10 +18,25 @@ class RoleMiddleware
     {
         $user = $request->user();   // null if guest
 
-        if (! $user || ! in_array($user->role, $roles, true)) {
-            abort(403, 'Unauthorized');
+        // redirect to login if not authenticated
+        if (! $user) {
+            return redirect()->route('login');
+        }
+
+        // redirect to respective homepage/dashboard based on user role
+        if (! in_array($user->role, $roles, true)) {
+            return redirect($this->redirectPathForRole($user->role));
         }
 
         return $next($request);
+    }
+
+    protected function redirectPathForRole(string $role): string
+    {
+        return match ($role) {
+            'admin' => '/dashboard',
+            'user' => '/products',
+            default => '/login',
+        };
     }
 }
