@@ -42,7 +42,7 @@ Route::middleware(['auth', 'verified', 'role:admin,user'])->group(function () {
     // Admin-only: manage customers
     Route::middleware('role:admin')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        Route::resource('customers', CustomerController::class)->only(['index', 'create']);
+        Route::resource('customers', CustomerController::class)->only(['index', 'create', 'store']);
         Route::resource('products',   ProductController::class)->except('index');      // Full CRUD except list
         Route::resource('categories', CategoryController::class)->except('index');     // Full CRUD except list
         Route::resource('admins',     AdminController::class)->only(['index', 'create']);
