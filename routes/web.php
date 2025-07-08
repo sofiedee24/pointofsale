@@ -46,6 +46,7 @@ Route::middleware(['auth', 'verified', 'role:admin,user'])->group(function () {
         Route::resource('products',   ProductController::class)->except('index');      // Full CRUD except list
         Route::resource('categories', CategoryController::class)->except('index');     // Full CRUD except list
         Route::resource('admins',     AdminController::class)->only(['index', 'create']);
+        Route::patch('/admins/{user}/demote', [AdminController::class, 'demote'])->name('admins.demote');
     });
 });
 
