@@ -146,15 +146,31 @@
                         </div>
                     </div>
                 </div>
-                <label for="table-search" class="sr-only">Search</label>
-                <div class="relative">
-                    <div class="rtl:inset-r-0 start-0 ps-3 absolute inset-y-0 flex items-center pointer-events-none">
-                        <svg class="dark:text-gray-400 w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                        </svg>
-                    </div>
-                    <input type="text" id="table-search-users" class="ps-10 w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg" placeholder="Search for users">
-                </div>
+                <form method="GET" class="flex flex-wrap items-center gap-2 mb-4">
+                  <input type="text" name="search" placeholder="Search name or email"
+                        value="{{ request('search') }}"
+                        class="px-2 py-1 border rounded-md" />
+
+                  <select name="sort_by" class="px-2 py-1 border rounded-md">
+                      <option value="created_at" {{ request('sort_by') == 'created_at' ? 'selected' : '' }}>Newest</option>
+                      <option value="name" {{ request('sort_by') == 'name' ? 'selected' : '' }}>Name</option>
+                      <option value="email" {{ request('sort_by') == 'email' ? 'selected' : '' }}>Email</option>
+                  </select>
+
+                  <select name="order" class="px-2 py-1 border rounded-md">
+                      <option value="asc" {{ request('order') == 'asc' ? 'selected' : '' }}>Asc</option>
+                      <option value="desc" {{ request('order') == 'desc' ? 'selected' : '' }}>Desc</option>
+                  </select>
+
+                  <button type="submit" class="px-3 py-1 text-white bg-blue-600 rounded">Apply</button>
+
+                  {{-- Reset Filters --}}
+                  <a href="{{ route('admins.index') }}"
+                    class="hover:bg-gray-400 px-3 py-1 text-black bg-gray-300 rounded">
+                      Reset Filters
+                  </a>
+              </form>
+
             </div>
 
             @if($admins->isEmpty())

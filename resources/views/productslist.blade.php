@@ -105,7 +105,13 @@
                   <a href="#" class="hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white block px-4 py-2 text-sm text-gray-700" role="menuitem">Earnings</a>
                 </li>
                 <li>
-                  <a href="#" class="hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white block px-4 py-2 text-sm text-gray-700" role="menuitem">Sign out</a>
+                  <form action="{{ route('logout') }}" method="POST"
+                  class="hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  >
+                    @csrf
+                    <button type="submit">Logout</button>
+                  </form>
                 </li>
               </ul>
             </div>
@@ -245,11 +251,6 @@
 
         </tbody>
     </table>
-
-    <form action="{{ route('logout') }}" method="POST">
-      @csrf
-      <button type="submit">Logout</button>
-    </form>
 </div>
            
 

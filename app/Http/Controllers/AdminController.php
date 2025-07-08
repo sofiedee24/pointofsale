@@ -11,9 +11,26 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $admins = User::where('role', 'admin')->latest()->get();
+        $query = User::query()->where('role', 'admin');
+
+        // Search by name or email
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        // Sort
+        $sortField = $request->get('sort_by', 'created_at');
+        $sortOrder = $request->get('order', 'desc');
+        if (in_array($sortField, ['name', 'email', 'created_at']) && in_array($sortOrder, ['asc', 'desc'])) {
+            $query->orderBy($sortField, $sortOrder);
+        }
+
+        $admins = $query->paginate(10)->withQueryString();
 
         return view('adminview', compact('admins'));
     }
@@ -21,17 +38,17 @@ class AdminController extends Controller
 
     public function demote(Request $request, User $user)
     {
-        Log::info('Attempting to demote user ID: ' . $user->id);
+        // Log::info('Attempting to demote user ID: ' . $user->id);
 
         if ($request->user()->is($user)) {
-            Log::warning('Blocked self-demotion for user ID: ' . $user->id);
+            // Log::warning('Blocked self-demotion for user ID: ' . $user->id);
             return back()->with('error', 'You cannot demote yourself.');
         }
 
         $user->role = 'user';
         $user->save();
 
-        Log::info('Demotion success for user ID: ' . $user->id);
+        // Log::info('Demotion success for user ID: ' . $user->id);
 
         return back()->with('success', 'Admin demoted to user.');
     }
