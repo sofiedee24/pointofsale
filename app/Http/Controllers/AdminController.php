@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -11,7 +12,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('adminview');
+        $admins = User::where('role', 'admin')->latest()->get();
+
+        return view('adminview', compact('admins'));
     }
 
     /**
