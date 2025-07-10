@@ -11,9 +11,28 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->latest()->paginate(10);
+        $query = Product::query();
+
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->searh . '%');
+            });
+        }
+
+        $sortField = $request->get('sort_by', 'created_at');
+        $sortOrder = $request->get('order', 'desc');
+
+        if (
+            in_array($sortField, ['name', 'created_at']) &&
+            in_array($sortOrder, ['asc', 'desc'])
+        ) {
+            $query->orderBy($sortField, $sortOrder);
+        }
+
+
+        $products = $query->paginate(10)->withQueryString();
         return view('productslist', compact('products'));
     }
 

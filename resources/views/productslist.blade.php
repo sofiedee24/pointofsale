@@ -124,6 +124,11 @@
 <x-sidepanel />
 
 <div class="sm:ml-64 p-4">
+
+  <div class="items-end mt-16">
+    <x-filter-bar :sortFields="['name', 'price', 'created_at']" />
+  </div>
+
 <div class="mt-14 p-4" >
    
 

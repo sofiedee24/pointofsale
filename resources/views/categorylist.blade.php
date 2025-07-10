@@ -184,8 +184,14 @@
 </aside>
 
 <div class="sm:ml-64 p-4">
-<div class="mt-14 p-4" >
+
+  <div class="items-end mt-16">
+    <x-filter-bar :sortFields="['name', 'created_at']" />
+  </div>
+
+<div class="p-4 mt-6" >
    
+
 
 <div class="sm:rounded-lg relative overflow-x-auto bg-gray-100 shadow-md">
     {{-- <div class="flex-column md:flex-row md:space-y-0 dark:bg-gray-900 flex flex-wrap items-center justify-between pb-4 space-y-4 bg-gray-200">

@@ -3,15 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('customerlist');
+        $query = User::query()->where('role', 'user');
+
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        $sortField = $request->get('sort_by', 'created_at');
+        $sortOrder = $request->get('order', 'desc');
+
+        if (
+            in_array($sortField, ['name', 'email', 'created_at']) &&
+            in_array($sortOrder, ['asc', 'desc'])
+        ) {
+            $query->orderBy($sortField, $sortOrder);
+        }
+
+        $customers = $query->paginate(10)->withQueryString();
+
+        return view('customerlist', compact('customers'));
     }
 
     /**

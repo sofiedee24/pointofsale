@@ -151,13 +151,13 @@
                         value="{{ request('search') }}"
                         class="px-2 py-1 border rounded-md" />
 
-                  <select name="sort_by" class="px-2 py-1 border rounded-md">
+                  <select name="sort_by" class="px-10 py-1 border rounded-md">
                       <option value="created_at" {{ request('sort_by') == 'created_at' ? 'selected' : '' }}>Newest</option>
                       <option value="name" {{ request('sort_by') == 'name' ? 'selected' : '' }}>Name</option>
                       <option value="email" {{ request('sort_by') == 'email' ? 'selected' : '' }}>Email</option>
                   </select>
 
-                  <select name="order" class="px-2 py-1 border rounded-md">
+                  <select name="order" class="px-6 py-1 border rounded-md">
                       <option value="asc" {{ request('order') == 'asc' ? 'selected' : '' }}>Asc</option>
                       <option value="desc" {{ request('order') == 'desc' ? 'selected' : '' }}>Desc</option>
                   </select>
@@ -234,7 +234,7 @@
                                         <button type="submit" class="hover:underline text-red-600">Demote</button>
                                     </form>
                                 @else
-                                    <span class="text-gray-400">You</span>
+                                    <span class="text-gray-400">Can't Demote Self</span>
                                 @endif
                             </td>
                         </tr>
