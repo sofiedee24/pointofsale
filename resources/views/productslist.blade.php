@@ -125,52 +125,28 @@
 
 <div class="sm:ml-64 p-4">
 
-  <div class="items-end mt-16">
+  <div class="flex justify-end mt-16">
+
     <x-filter-bar :sortFields="['name', 'price', 'created_at']" />
+    
   </div>
 
-<div class="mt-14 p-4" >
+<div class="p-4" >
    
-
-<div class="sm:rounded-lg relative overflow-x-auto shadow-md">
-    <div class="flex-column md:flex-row md:space-y-0 dark:bg-gray-900 flex flex-wrap items-center justify-between pb-4 space-y-4 bg-white">
-        <div>
-            
-        <p class="dark:text-gray-300 px-6 py-3 mt-2 text-xl font-semibold tracking-wide text-gray-800 uppercase rounded-md">
-            Product Lists
-        </p>
-
-
-
-            <!-- Dropdown menu -->
-            <div id="dropdownAction" class="w-44 dark:bg-gray-700 dark:divide-gray-600 z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm">
-                <ul class="dark:text-gray-200 py-1 text-sm text-gray-700" aria-labelledby="dropdownActionButton">
-                    <li>
-                        <a href="#" class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white block px-4 py-2">Reward</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white block px-4 py-2">Promote</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white block px-4 py-2">Activate account</a>
-                    </li>
-                </ul>
-                <div class="py-1">
-                    <a href="#" class="hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white block px-4 py-2 text-sm text-gray-700">Delete User</a>
-                </div>
+    <div class="sm:rounded-lg relative overflow-x-auto shadow-md">
+        <div class="flex-column md:flex-row md:space-y-0 dark:bg-gray-900 flex flex-wrap items-center justify-between pb-4 space-y-4 bg-white">
+            <div>           
+              <p class="dark:text-gray-300 px-6 py-3 mt-2 text-xl font-semibold tracking-wide text-gray-800 uppercase rounded-md">
+                  Product Lists
+              </p>
             </div>
-        </div>
 
-
-
-        <label for="table-search" class="sr-only">Search</label>
-        <a href="{{ route('products.create') }}">
-        <div class="hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-300 font-small me-3 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center justify-center px-3 py-1 mb-3 text-sm text-center text-white transition-all bg-blue-700 rounded-full shadow-sm">
-            Add Products
-            
-        </div>
-        </a>
-
+            <label for="table-search" class="sr-only">Search</label>
+            <a href="{{ route('products.create') }}">
+              <div class="hover:bg-blue-700 px-4 py-2 text-white bg-blue-600 rounded">
+                  + Add Products
+              </div>
+            </a>
 
     </div>
     <table class="rtl:text-right dark:text-gray-400 w-full text-sm text-left text-gray-500">

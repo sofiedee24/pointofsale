@@ -1,4 +1,4 @@
-<form method="GET" class="flex flex-wrap items-center gap-2 mb-4">
+<form method="GET" class="flex flex-wrap items-end gap-2 mb-4">
     <input type="text" name="search" placeholder="Search"
            value="{{ request('search') }}"
            class="px-2 py-1 border rounded-md" />

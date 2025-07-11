@@ -185,11 +185,13 @@
 
 <div class="sm:ml-64 p-4">
 
-  <div class="items-end mt-16">
+  <div class="flex justify-end mt-16">
+
     <x-filter-bar :sortFields="['name', 'created_at']" />
+    
   </div>
 
-<div class="p-4 mt-6" >
+<div class="p-4" >
    
 
 
