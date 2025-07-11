@@ -134,23 +134,19 @@
 <div class="p-4" >
    
     <div class="sm:rounded-lg relative overflow-x-auto shadow-md">
-        <div class="flex-column md:flex-row md:space-y-0 dark:bg-gray-900 flex flex-wrap items-center justify-between pb-4 space-y-4 bg-white">
+        <div class="flex-column md:flex-row md:space-y-0 dark:bg-gray-900 flex flex-wrap items-center justify-between px-4 pt-8 pb-4 space-y-4 bg-gray-100">
             <div>           
-              <p class="dark:text-gray-300 px-6 py-3 mt-2 text-xl font-semibold tracking-wide text-gray-800 uppercase rounded-md">
-                  Product Lists
-              </p>
+              <h2 class="text-2xl font-bold">All Products</h2>
             </div>
 
-            <label for="table-search" class="sr-only">Search</label>
             <a href="{{ route('products.create') }}">
               <div class="hover:bg-blue-700 px-4 py-2 text-white bg-blue-600 rounded">
                   + Add Products
               </div>
             </a>
-
-    </div>
+        </div>
     <table class="rtl:text-right dark:text-gray-400 w-full text-sm text-left text-gray-500">
-        <thead class="bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-xs text-gray-700 uppercase">
+        <thead class="dark:bg-gray-700 dark:text-gray-400 text-xs text-gray-700 uppercase bg-gray-200">
             <tr>
                
                 <th scope="col" class="px-6 py-3">
@@ -171,7 +167,7 @@
             @forelse ($products as $product)
                 
             {{-- START CARD --}}
-            <tr class="dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 bg-white border-b border-gray-200">
+            <tr class="hover:bg-gray-50 bg-gray-100 border-b">
                 
                 <th scope="row" class="whitespace-nowrap dark:text-white flex items-center px-6 py-4 text-gray-900">
                     {{-- IMAGE --}}

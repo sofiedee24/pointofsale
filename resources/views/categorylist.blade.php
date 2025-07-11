@@ -196,17 +196,7 @@
 
 
 <div class="sm:rounded-lg relative overflow-x-auto bg-gray-100 shadow-md">
-    {{-- <div class="flex-column md:flex-row md:space-y-0 dark:bg-gray-900 flex flex-wrap items-center justify-between pb-4 space-y-4 bg-gray-200">
-        <label for="table-search" class="sr-only">Search</label>
-        <div class="relative">
-            <div class="rtl:inset-r-0 start-0 ps-3 absolute inset-y-0 flex items-center pointer-events-none">
-                <svg class="dark:text-gray-400 w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                </svg>
-            </div>
-            <input type="text" id="table-search-users" class="ps-10 w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg" placeholder="Search for users">
-        </div>
-    </div> --}}
+    
     <table class="rtl:text-right dark:text-gray-400 w-full text-sm text-left text-gray-500">
     
         <tbody>
@@ -260,6 +250,7 @@
                 </div>
 
                 <!-- Add Category Modal -->
+                {{-- THE DOUBLE TAILWIND CLASS IS INTENTIONAL --}}
                 <div id="addCategoryModal" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
                     <div class="relative w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
                         <button onclick="document.getElementById('addCategoryModal').classList.add('hidden')" class="top-2 right-3 hover:text-gray-700 absolute text-lg text-gray-500">&times;</button>
